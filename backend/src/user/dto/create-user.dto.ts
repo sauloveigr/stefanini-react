@@ -22,10 +22,10 @@ export class CreateUserDto {
   birthDate: string;
 
   @IsOptional()
-  placeOfBirth?: string; // naturalidade em inglês
+  placeOfBirth?: string;
 
   @IsOptional()
-  nationality?: string; // nacionalidade em inglês
+  nationality?: string;
 
   @IsNotEmpty()
   @Matches(/^\d{11}$/, { message: 'CPF must have 11 numeric digits' })

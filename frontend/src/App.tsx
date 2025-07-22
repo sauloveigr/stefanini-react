@@ -1,12 +1,11 @@
-import { Header } from "./components/UserManagement/Header"
+import { UserList } from "./components/user/UserForm/UserList";
 
 function App() {
-
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
-      <Header onAdd={() => { }} />
+    <div className="min-h-screen bg-gray-50">
+      <UserList />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
