@@ -41,29 +41,61 @@ A full-stack user management system with React frontend and NestJS backend, conn
 
 ### Running the Application
 
-1. **Start the database and backend:**
+1. **Start PostgreSQL Database:**
 
     ```bash
-    docker-compose up -d
+    # Make sure you're in the root directory (/stefanini)
+    cd stefanini
+
+    # Start PostgreSQL in Docker
+    docker-compose up postgres -d
     ```
 
-2. **Install frontend dependencies:**
+2. **Start Backend (Terminal 1):**
 
     ```bash
-    cd frontend
+    # Open a NEW terminal window
+    # Navigate to backend directory
+    cd backend/
+
+    # Install dependencies (if not already done)
     yarn install
+
+    # Start the backend
+    yarn start:dev
     ```
 
-3. **Start the frontend development server:**
+    **Wait until you see:**
+
+    ```
+    🚀 Application is running on: http://localhost:3001
+    ```
+
+3. **Start Frontend (Terminal 2):**
 
     ```bash
-    cd frontend
+    # Open ANOTHER NEW terminal window
+    # Navigate to frontend directory
+    cd frontend/
+
+    # Install dependencies (if not already done)
+    yarn install
+
+    # Start the frontend
     yarn dev
     ```
 
-4. **Access the application:**
+    **Wait until you see:**
+
+    ```
+    VITE v7.0.5  ready in 2251 ms
+    ➜  Local:   http://localhost:5173/
+    ```
+
+4. **Access the Application:**
     - Frontend: http://localhost:5173
-    - Backend API: http://localhost:3000
+    - Backend API: http://localhost:3001
+    - Health check: http://localhost:3001/health
 
 ### API Endpoints
 
@@ -112,14 +144,21 @@ The User model includes:
 
     - Ensure Docker is running
     - Check if PostgreSQL container is healthy: `docker-compose ps`
+    - Wait for PostgreSQL to be ready: `docker-compose logs postgres`
 
 2. **Frontend can't connect to backend:**
 
-    - Verify backend is running on port 3000
+    - Verify backend is running on port 3001
     - Check CORS configuration in backend
     - Ensure API_BASE_URL in frontend matches backend URL
 
-3. **Form validation errors:**
+3. **Port conflicts:**
+
+    - Backend runs on port 3001
+    - Frontend runs on port 5173
+    - PostgreSQL runs on port 5432
+
+4. **Form validation errors:**
     - Check that all required fields are filled
     - Verify email format if provided
     - Ensure CPF has exactly 11 digits
@@ -127,17 +166,24 @@ The User model includes:
 ## Project Structure
 
 ```
-├── frontend/                 # React frontend
+├── frontend/                 # React frontend (port 5173)
 │   ├── src/
 │   │   ├── components/      # React components
 │   │   ├── hooks/          # Custom hooks
 │   │   ├── types/          # TypeScript types
 │   │   └── utils/          # Utility functions
 │   └── package.json
-├── backend/                 # NestJS backend
+├── backend/                 # NestJS backend (port 3001)
 │   ├── src/
 │   │   ├── user/           # User module
 │   │   └── prisma/         # Database schema
 │   └── package.json
-└── docker-compose.yml      # Docker configuration
+└── docker-compose.yml      # PostgreSQL configuration (port 5432)
 ```
+
+## Summary
+
+-   ✅ **PostgreSQL**: Running in Docker on port 5432
+-   ✅ **Backend**: Running locally on port 3001
+-   ✅ **Frontend**: Running locally on port 5173
+-   ✅ **Application**: Accessible at `http://localhost:5173`
