@@ -15,14 +15,14 @@ datasource db {
 }
 
 model User {
-  id              String   @id @default(uuid()) 
-  name            String
-  gender          String?
-  email           String? @unique
-  birthDate       DateTime
-  nationality     String?
-  placeOfBirth    String?
-  cpf             String   @unique
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id           String   @id @default(uuid())
+  name         String
+  gender       String?
+  email        String?
+  birthDate    DateTime
+  nationality  String?
+  placeOfBirth String?
+  cpf          String   @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

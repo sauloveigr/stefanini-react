@@ -17,9 +17,20 @@ interface UserFormProps {
   onSubmit: (userData: UserFormData) => void;
   onCancel: () => void;
   title: string;
+  backendErrors?: { [key: string]: string };
 }
 
-export const UserForm = ({ user, onSubmit, onCancel, title }: UserFormProps) => {
+const formatDateForInput = (dateString: string): string => {
+  const date = new Date(dateString);
+  return date.toISOString().split('T')[0] || '';
+};
+
+const formatCPF = (cpf: string): string => {
+  const cleanCpf = cpf.replace(/\D/g, '');
+  return cleanCpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+};
+
+export const UserForm = ({ user, onSubmit, onCancel, title, backendErrors }: UserFormProps) => {
   const {
     register,
     handleSubmit,
@@ -32,15 +43,19 @@ export const UserForm = ({ user, onSubmit, onCancel, title }: UserFormProps) => 
     if (user) {
       setValue("name", user.name);
       setValue("gender", user.gender);
-      setValue("email", user.email);
-      setValue("birthDate", user.birthDate);
-      setValue("placeOfBirth", user.placeOfBirth);
-      setValue("nationality", user.nationality);
-      setValue("cpf", user.cpf);
+      setValue("email", user.email || "");
+      setValue("birthDate", user.birthDate ? formatDateForInput(user.birthDate) : "");
+      setValue("placeOfBirth", user.placeOfBirth || "");
+      setValue("nationality", user.nationality || "");
+      setValue("cpf", formatCPF(user.cpf));
     } else {
       reset();
     }
-  }, [user]);
+  }, [user, setValue, reset]);
+
+  const getFieldError = (fieldName: string) => {
+    return backendErrors?.[fieldName] || errors[fieldName as keyof typeof errors]?.message;
+  };
 
   return (
     <Transition appear show={true} as={Fragment}>
@@ -76,14 +91,14 @@ export const UserForm = ({ user, onSubmit, onCancel, title }: UserFormProps) => 
                     label="Nome"
                     required
                     placeholder="Digite o nome completo"
-                    error={errors.name?.message}
+                    error={getFieldError("name")}
                     register={register("name", { required: "Nome é obrigatório" })}
                   />
 
                   <FormField
                     label="Sexo"
                     required
-                    error={errors.gender?.message}
+                    error={getFieldError("gender")}
                   >
                     <Select
                       {...register("gender")}
@@ -98,12 +113,13 @@ export const UserForm = ({ user, onSubmit, onCancel, title }: UserFormProps) => 
 
                   <TextInputField
                     label="Email"
-                    required
                     placeholder="exemplo@email.com"
-                    error={errors.email?.message}
+                    error={getFieldError("email")}
                     register={register("email", {
                       validate: (email: string | undefined) => {
-                        if (email) return validateEmail(email);
+                        if (email && email.trim() !== '') {
+                          return validateEmail(email);
+                        }
                         return true;
                       }
                     })}
@@ -113,7 +129,7 @@ export const UserForm = ({ user, onSubmit, onCancel, title }: UserFormProps) => 
                   <TextInputField
                     label="Data de nascimento"
                     required
-                    error={errors.birthDate?.message}
+                    error={getFieldError("birthDate")}
                     register={register("birthDate", {
                       required: "Data de nascimento é obrigatória",
                       validate: validateDate
@@ -123,17 +139,15 @@ export const UserForm = ({ user, onSubmit, onCancel, title }: UserFormProps) => 
 
                   <TextInputField
                     label="Naturalidade"
-                    required
-                    placeholder="Cidade onde nasceu"
-                    error={errors.placeOfBirth?.message}
+                    placeholder="Ex: Fortaleza - CE"
+                    error={getFieldError("placeOfBirth")}
                     register={register("placeOfBirth")}
                   />
 
                   <TextInputField
                     label="Nacionalidade"
-                    required
-                    placeholder="País de origem"
-                    error={errors.nationality?.message}
+                    placeholder="Ex: Brasileira"
+                    error={getFieldError("nationality")}
                     register={register("nationality")}
                   />
 
@@ -141,11 +155,12 @@ export const UserForm = ({ user, onSubmit, onCancel, title }: UserFormProps) => 
                     label="CPF"
                     required
                     placeholder="000.000.000-00"
-                    error={errors.cpf?.message}
+                    error={getFieldError("cpf")}
                     register={register("cpf", {
                       required: "CPF é obrigatório",
                       validate: validateCPF
                     })}
+                    mask="999.999.999-99"
                   />
                 </div>
 

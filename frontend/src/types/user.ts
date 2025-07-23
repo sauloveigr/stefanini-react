@@ -3,7 +3,7 @@ export type Gender = 'male' | 'female' | 'other';
 export interface User {
     id: string;
     name: string;
-    gender: Gender;
+    gender?: Gender;
     email?: string;
     birthDate: string;
     placeOfBirth?: string;
