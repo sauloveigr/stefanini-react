@@ -1,189 +1,189 @@
-# User Management System
+# Sistema de Gerenciamento de Usuários
 
-A full-stack user management system with React frontend and NestJS backend, connected via axios for CRUD operations.
+Um sistema full-stack de gerenciamento de usuários com frontend React e backend NestJS, conectados via axios para operações CRUD.
 
-## Features
+## Funcionalidades
 
--   ✅ Create, Read, Update, Delete (CRUD) operations for users
--   ✅ Real-time data synchronization between frontend and backend
--   ✅ Form validation and error handling
--   ✅ Search and filter functionality
--   ✅ Responsive design with Tailwind CSS
--   ✅ Toast notifications for user feedback
--   ✅ PostgreSQL database with Prisma ORM
+-   ✅ Operações Create, Read, Update, Delete (CRUD) para usuários
+-   ✅ Sincronização de dados em tempo real entre frontend e backend
+-   ✅ Validação de formulários e tratamento de erros
+-   ✅ Funcionalidade de busca e filtro
+-   ✅ Design responsivo com Tailwind CSS
+-   ✅ Notificações toast para feedback do usuário
+-   ✅ Banco de dados PostgreSQL com Prisma ORM
 
-## Tech Stack
+## Stack Tecnológica
 
 ### Frontend
 
--   React 19 with TypeScript
--   Vite for build tooling
--   Tailwind CSS for styling
--   Axios for API communication
--   React Hook Form for form handling
--   Headless UI for accessible components
+-   React 19 com TypeScript
+-   Vite para ferramentas de build
+-   Tailwind CSS para estilização
+-   Axios para comunicação com API
+-   React Hook Form para manipulação de formulários
+-   Headless UI para componentes acessíveis
 
 ### Backend
 
--   NestJS with TypeScript
+-   NestJS com TypeScript
 -   Prisma ORM
--   PostgreSQL database
--   Class-validator for DTO validation
--   CORS enabled for frontend communication
+-   Banco de dados PostgreSQL
+-   Class-validator para validação de DTO
+-   CORS habilitado para comunicação com frontend
 
-## Getting Started
+## Como Começar
 
-### Prerequisites
+### Pré-requisitos
 
--   Node.js (v18 or higher)
--   Docker and Docker Compose
--   Yarn or npm
+-   Node.js (v18 ou superior)
+-   Docker e Docker Compose
+-   Yarn ou npm
 
-### Running the Application
+### Executando a Aplicação
 
-1. **Start PostgreSQL Database:**
+1. **Iniciar Banco de Dados PostgreSQL:**
 
     ```bash
-    # Make sure you're in the root directory (/stefanini)
+    # Certifique-se de estar no diretório raiz (/stefanini)
     cd stefanini
 
-    # Start PostgreSQL in Docker
+    # Iniciar PostgreSQL no Docker
     docker-compose up postgres -d
     ```
 
-2. **Start Backend (Terminal 1):**
+2. **Iniciar Backend (Terminal 1):**
 
     ```bash
-    # Open a NEW terminal window
-    # Navigate to backend directory
+    # Abra uma NOVA janela de terminal
+    # Navegue até o diretório backend
     cd backend/
 
-    # Install dependencies (if not already done)
+    # Instale as dependências (se ainda não foi feito)
     yarn install
 
-    # Start the backend
+    # Inicie o backend
     yarn start:dev
     ```
 
-    **Wait until you see:**
+    **Aguarde até ver:**
 
     ```
     🚀 Application is running on: http://localhost:3001
     ```
 
-3. **Start Frontend (Terminal 2):**
+3. **Iniciar Frontend (Terminal 2):**
 
     ```bash
-    # Open ANOTHER NEW terminal window
-    # Navigate to frontend directory
+    # Abra OUTRA NOVA janela de terminal
+    # Navegue até o diretório frontend
     cd frontend/
 
-    # Install dependencies (if not already done)
+    # Instale as dependências (se ainda não foi feito)
     yarn install
 
-    # Start the frontend
+    # Inicie o frontend
     yarn dev
     ```
 
-    **Wait until you see:**
+    **Aguarde até ver:**
 
     ```
     VITE v7.0.5  ready in 2251 ms
     ➜  Local:   http://localhost:5173/
     ```
 
-4. **Access the Application:**
+4. **Acessar a Aplicação:**
     - Frontend: http://localhost:5173
     - Backend API: http://localhost:3001
-    - Health check: http://localhost:3001/health
+    - Verificação de saúde: http://localhost:3001/health
 
-### API Endpoints
+### Endpoints da API
 
-The backend provides the following REST API endpoints:
+O backend fornece os seguintes endpoints REST:
 
--   `GET /users` - Get all users
--   `GET /users/:id` - Get a specific user
--   `POST /users` - Create a new user
--   `PATCH /users/:id` - Update an existing user
--   `DELETE /users/:id` - Delete a user
+-   `GET /users` - Obter todos os usuários
+-   `GET /users/:id` - Obter um usuário específico
+-   `POST /users` - Criar um novo usuário
+-   `PATCH /users/:id` - Atualizar um usuário existente
+-   `DELETE /users/:id` - Deletar um usuário
 
-### Database Schema
+### Schema do Banco de Dados
 
-The User model includes:
+O modelo User inclui:
 
--   `id` (UUID, primary key)
--   `name` (required)
--   `gender` (optional)
--   `email` (optional, unique)
--   `birthDate` (required)
--   `placeOfBirth` (optional)
--   `nationality` (optional)
--   `cpf` (required, unique)
--   `createdAt` (auto-generated)
--   `updatedAt` (auto-generated)
+-   `id` (UUID, chave primária)
+-   `name` (obrigatório)
+-   `gender` (opcional)
+-   `email` (opcional, único)
+-   `birthDate` (obrigatório)
+-   `placeOfBirth` (opcional)
+-   `nationality` (opcional)
+-   `cpf` (obrigatório, único)
+-   `createdAt` (gerado automaticamente)
+-   `updatedAt` (gerado automaticamente)
 
-## Development
+## Desenvolvimento
 
-### Frontend Development
+### Desenvolvimento Frontend
 
--   The frontend uses the `useUsers` hook for all API operations
--   Toast notifications provide user feedback for all CRUD operations
--   Form validation ensures data integrity
--   Error handling with user-friendly messages
+-   O frontend usa o hook `useUsers` para todas as operações da API
+-   Notificações toast fornecem feedback do usuário para todas as operações CRUD
+-   Validação de formulários garante integridade dos dados
+-   Tratamento de erros com mensagens amigáveis ao usuário
 
-### Backend Development
+### Desenvolvimento Backend
 
--   NestJS modules for clean architecture
--   Prisma for database operations
--   DTO validation with class-validator
--   Proper error handling and HTTP status codes
+-   Módulos NestJS para arquitetura limpa
+-   Prisma para operações de banco de dados
+-   Validação de DTO com class-validator
+-   Tratamento adequado de erros e códigos de status HTTP
 
-## Troubleshooting
+## Solução de Problemas
 
-1. **Database connection issues:**
+1. **Problemas de conexão com banco de dados:**
 
-    - Ensure Docker is running
-    - Check if PostgreSQL container is healthy: `docker-compose ps`
-    - Wait for PostgreSQL to be ready: `docker-compose logs postgres`
+    - Certifique-se de que o Docker está rodando
+    - Verifique se o container PostgreSQL está saudável: `docker-compose ps`
+    - Aguarde o PostgreSQL estar pronto: `docker-compose logs postgres`
 
-2. **Frontend can't connect to backend:**
+2. **Frontend não consegue conectar ao backend:**
 
-    - Verify backend is running on port 3001
-    - Check CORS configuration in backend
-    - Ensure API_BASE_URL in frontend matches backend URL
+    - Verifique se o backend está rodando na porta 3001
+    - Verifique a configuração CORS no backend
+    - Certifique-se de que API_BASE_URL no frontend corresponde à URL do backend
 
-3. **Port conflicts:**
+3. **Conflitos de porta:**
 
-    - Backend runs on port 3001
-    - Frontend runs on port 5173
-    - PostgreSQL runs on port 5432
+    - Backend roda na porta 3001
+    - Frontend roda na porta 5173
+    - PostgreSQL roda na porta 5432
 
-4. **Form validation errors:**
-    - Check that all required fields are filled
-    - Verify email format if provided
-    - Ensure CPF has exactly 11 digits
+4. **Erros de validação de formulário:**
+    - Verifique se todos os campos obrigatórios estão preenchidos
+    - Verifique o formato do email se fornecido
+    - Certifique-se de que o CPF tem exatamente 11 dígitos
 
-## Project Structure
+## Estrutura do Projeto
 
 ```
-├── frontend/                 # React frontend (port 5173)
+├── frontend/                 # Frontend React (porta 5173)
 │   ├── src/
-│   │   ├── components/      # React components
-│   │   ├── hooks/          # Custom hooks
-│   │   ├── types/          # TypeScript types
-│   │   └── utils/          # Utility functions
+│   │   ├── components/      # Componentes React
+│   │   ├── hooks/          # Hooks personalizados
+│   │   ├── types/          # Tipos TypeScript
+│   │   └── utils/          # Funções utilitárias
 │   └── package.json
-├── backend/                 # NestJS backend (port 3001)
+├── backend/                 # Backend NestJS (porta 3001)
 │   ├── src/
-│   │   ├── user/           # User module
-│   │   └── prisma/         # Database schema
+│   │   ├── user/           # Módulo de usuário
+│   │   └── prisma/         # Schema do banco de dados
 │   └── package.json
-└── docker-compose.yml      # PostgreSQL configuration (port 5432)
+└── docker-compose.yml      # Configuração PostgreSQL (porta 5432)
 ```
 
-## Summary
+## Resumo
 
--   ✅ **PostgreSQL**: Running in Docker on port 5432
--   ✅ **Backend**: Running locally on port 3001
--   ✅ **Frontend**: Running locally on port 5173
--   ✅ **Application**: Accessible at `http://localhost:5173`
+-   ✅ **PostgreSQL**: Rodando no Docker na porta 5432
+-   ✅ **Backend**: Rodando localmente na porta 3001
+-   ✅ **Frontend**: Rodando localmente na porta 5173
+-   ✅ **Aplicação**: Acessível em `http://localhost:5173`
