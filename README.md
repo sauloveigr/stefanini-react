@@ -11,6 +11,7 @@ Um sistema full-stack de gerenciamento de usuários com frontend React e backend
 -   ✅ Design responsivo com Tailwind CSS
 -   ✅ Notificações toast para feedback do usuário
 -   ✅ Banco de dados PostgreSQL com Prisma ORM
+-   ✅ Testes automatizados com Jest (Backend)
 
 ## Stack Tecnológica
 
@@ -30,6 +31,7 @@ Um sistema full-stack de gerenciamento de usuários com frontend React e backend
 -   Banco de dados PostgreSQL
 -   Class-validator para validação de DTO
 -   CORS habilitado para comunicação com frontend
+-   Jest para testes automatizados
 
 ## Como Começar
 
@@ -138,6 +140,88 @@ O modelo User inclui:
 -   Validação de DTO com class-validator
 -   Tratamento adequado de erros e códigos de status HTTP
 
+## Testes Automatizados
+
+### Executando os Testes
+
+```bash
+# Navegue até o diretório backend
+cd backend/
+
+# Executar todos os testes
+yarn test
+
+# Executar testes com cobertura de código
+yarn test:cov
+
+# Executar testes em modo watch (desenvolvimento)
+yarn test:watch
+```
+
+### Cobertura de Testes
+
+O projeto mantém uma cobertura de testes robusta:
+
+-   **Statements**: 91.01% ✅
+-   **Functions**: 90% ✅
+-   **Lines**: 91.46% ✅
+-   **Branches**: 64.91% ✅
+
+### Testes Implementados
+
+#### Backend (Jest + NestJS Testing)
+
+1. **UserService** - Testes abrangentes para:
+
+    - Criação de usuários (com e sem campos opcionais)
+    - Listagem de usuários
+    - Busca por ID
+    - Atualização de usuários
+    - Remoção de usuários
+    - Validação de email
+    - Tratamento de erros (CPF duplicado, usuário não encontrado, erros de banco)
+
+2. **UserController** - Testes para:
+
+    - Todos os endpoints CRUD
+    - Tratamento de erros HTTP
+    - Respostas padronizadas
+    - Validação de status codes
+
+3. **AppController** e **AppService** - Testes básicos
+
+4. **CreateUserDto** - Testes de validação:
+
+    - Campos obrigatórios
+    - Campos opcionais
+    - Validação de CPF
+    - Validação de data de nascimento
+
+5. **UserModule** - Testes de integração do módulo
+
+### Estrutura dos Testes
+
+```
+backend/
+├── src/
+│   ├── user/
+│   │   ├── user.service.spec.ts      # Testes do UserService
+│   │   ├── user.controller.spec.ts   # Testes do UserController
+│   │   ├── user.module.spec.ts       # Testes de integração
+│   │   └── dto/
+│   │       └── create-user.dto.spec.ts # Testes de validação
+│   ├── app.controller.spec.ts         # Testes do AppController
+│   └── app.service.spec.ts           # Testes do AppService
+```
+
+### Benefícios dos Testes
+
+1. **Qualidade de Código**: Garantia de que as funcionalidades principais estão testadas
+2. **Manutenibilidade**: Mudanças futuras podem ser testadas automaticamente
+3. **Documentação**: Os testes servem como documentação do comportamento esperado
+4. **Refatoração Segura**: Mudanças podem ser feitas com confiança
+5. **Detecção de Regressões**: Problemas são identificados rapidamente
+
 ## Solução de Problemas
 
 1. **Problemas de conexão com banco de dados:**
@@ -159,9 +243,15 @@ O modelo User inclui:
     - PostgreSQL roda na porta 5432
 
 4. **Erros de validação de formulário:**
+
     - Verifique se todos os campos obrigatórios estão preenchidos
     - Verifique o formato do email se fornecido
     - Certifique-se de que o CPF tem exatamente 11 dígitos
+
+5. **Problemas com testes:**
+    - Certifique-se de estar no diretório `backend/`
+    - Execute `yarn install` se as dependências não estiverem instaladas
+    - Verifique se o Jest está configurado corretamente no `package.json`
 
 ## Estrutura do Projeto
 
@@ -176,6 +266,7 @@ O modelo User inclui:
 ├── backend/                 # Backend NestJS (porta 3001)
 │   ├── src/
 │   │   ├── user/           # Módulo de usuário
+│   │   │   ├── *.spec.ts   # Testes automatizados
 │   │   └── prisma/         # Schema do banco de dados
 │   └── package.json
 └── docker-compose.yml      # Configuração PostgreSQL (porta 5432)
@@ -187,3 +278,4 @@ O modelo User inclui:
 -   ✅ **Backend**: Rodando localmente na porta 3001
 -   ✅ **Frontend**: Rodando localmente na porta 5173
 -   ✅ **Aplicação**: Acessível em `http://localhost:5173`
+-   ✅ **Testes**: Cobertura de 91%+ com Jest
