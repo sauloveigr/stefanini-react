@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type {User, UserFormData} from '../types/user';
+import type {User, UserFormData} from '../../features/user/types/user';
 
 const API_BASE_URL = 'http://localhost:3001';
 

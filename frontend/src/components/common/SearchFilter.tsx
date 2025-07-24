@@ -17,8 +17,8 @@ export const SearchFilter = ({
   return (
     <article className="bg-white rounded-lg shadow-sm py-6 border border-gray-200 p-6">
       <div className="flex items-center gap-2 mb-4">
-        <Search className="h-5 w-5 text-purple-600" />
-        <h3 className="text-lg font-semibold text-gray-900">Buscar e Filtrar</h3>
+        <Search className="h-5 w-5 text-purple-600 flex-shrink-0" />
+        <h3 className="text-lg font-semibold text-gray-900 truncate" title="Buscar e Filtrar">Buscar e Filtrar</h3>
       </div>
       <div className="flex flex-col md:flex-row gap-4">
         <div className="flex-1 relative">
@@ -40,7 +40,6 @@ export const SearchFilter = ({
             <option value="all">Filtrar por sexo</option>
             <option value="male">Masculino</option>
             <option value="female">Feminino</option>
-            <option value="other">Outro</option>
           </Select>
           <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
             <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

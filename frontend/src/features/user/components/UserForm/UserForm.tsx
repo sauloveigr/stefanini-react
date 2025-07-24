@@ -2,15 +2,17 @@ import { useEffect, Fragment } from "react";
 import { useForm } from "react-hook-form";
 import { X, Save } from "lucide-react";
 import { Dialog, DialogPanel, Select, Transition, TransitionChild } from "@headlessui/react";
-import type { UserFormData } from "@/types/user";
-import type { User } from "@/types/user";
-import { validateEmail } from "@/utils/validateEmail";
-import { validateDate } from "@/utils/validateDate";
-import { validateCPF } from "@/utils/validateCpf";
-import { Button } from "@/components/ui/Button";
-import { FormField } from "@/components/ui/form/FormField";
-import { TextInputField } from "@/components/ui/form/TextInputField";
-import { DialogHeader } from "@/components/ui/form/FormHeader";
+import type { UserFormData } from "../../types/user";
+import type { User } from "../../types/user";
+import { validateEmail } from "../../../../utils/validation/validateEmail";
+import { validateDate } from "../../../../utils/validation/validateDate";
+import { validateCPF } from "../../../../utils/validation/validateCpf";
+import { formatCPF } from "../../../../utils/formatting/formatCpf";
+import { formatDateForInput } from "../../../../utils/formatting/formatDateForInput";
+import { Button } from "../../../../components/ui/Button";
+import { FormField } from "../../../../components/ui/form/FormField";
+import { TextInputField } from "../../../../components/ui/form/TextInputField";
+import { DialogHeader } from "../../../../components/ui/form/FormHeader";
 
 interface UserFormProps {
   user?: User;
@@ -19,16 +21,6 @@ interface UserFormProps {
   title: string;
   backendErrors?: { [key: string]: string };
 }
-
-const formatDateForInput = (dateString: string): string => {
-  const date = new Date(dateString);
-  return date.toISOString().split('T')[0] || '';
-};
-
-const formatCPF = (cpf: string): string => {
-  const cleanCpf = cpf.replace(/\D/g, '');
-  return cleanCpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-};
 
 export const UserForm = ({ user, onSubmit, onCancel, title, backendErrors }: UserFormProps) => {
   const {
@@ -107,7 +99,6 @@ export const UserForm = ({ user, onSubmit, onCancel, title, backendErrors }: Use
                       <option value="">Selecione o sexo</option>
                       <option value="male">Masculino</option>
                       <option value="female">Feminino</option>
-                      <option value="other">Outro</option>
                     </Select>
                   </FormField>
 

@@ -18,9 +18,11 @@ export function UserInfo({
   return (
     <div className={`flex items-center gap-2 text-gray-600 ${className}`}>
       {icon}
-      <span className={textClassName}>
-        <span className="font-medium text-gray-700">{label}:</span> {text}
-      </span>
+      <div className="flex-1 min-w-0">
+        <span className={`block truncate ${textClassName}`} title={text}>
+          <span className="font-medium text-gray-700">{label}:</span> {text}
+        </span>
+      </div>
     </div>
   );
 }

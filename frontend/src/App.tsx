@@ -1,4 +1,4 @@
-import { UserList } from "./components/user/UserForm/UserList";
+import { UserList } from "./features/user/components/UserForm/UserList";
 
 function App() {
   return (

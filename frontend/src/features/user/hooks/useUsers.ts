@@ -1,5 +1,5 @@
 import {useState, useEffect, useCallback} from 'react';
-import {UserApiService} from '../utils/api';
+import {UserApiService} from '../../../utils/api/client';
 import type {User, UserFormData} from '../types/user';
 
 interface UseUsersReturn {

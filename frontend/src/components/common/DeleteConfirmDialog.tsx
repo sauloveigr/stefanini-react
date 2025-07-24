@@ -1,7 +1,7 @@
-import type { User } from "@/types/user";
+import type { User } from "../../features/user/types/user";
 import { AlertTriangle } from "lucide-react";
 import { Dialog, DialogPanel, Transition, TransitionChild, DialogTitle } from "@headlessui/react";
-import { Button } from "./ui/Button";
+import { Button } from "../ui/Button";
 import { Fragment } from "react";
 
 interface DeleteConfirmDialogProps {

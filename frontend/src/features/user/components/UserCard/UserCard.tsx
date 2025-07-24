@@ -1,26 +1,16 @@
-import type { User } from "@/types/user";
+import type { User } from "../../types/user";
 import { Mail, Calendar, MapPin, Flag, CreditCard } from "lucide-react";
 import { UserInfo } from "./UserInfo";
 import { GenderBadge } from "./GenderBadge";
 import { UserHeader } from "./UserHeader";
+import { formatDate } from "../../../../utils/formatting/formatDate";
+import { formatCPF } from "../../../../utils/formatting/formatCpf";
 
 export interface UserCardProps {
   user: User;
   onEdit: () => void;
   onDelete: () => void;
 }
-
-const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
-  return new Intl.DateTimeFormat('pt-BR', {
-    timeZone: 'UTC',
-  }).format(date);
-};
-
-const formatCPF = (cpf: string) => {
-  const cleanCpf = cpf.replace(/\D/g, '');
-  return cleanCpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-};
 
 export const UserCard = ({ user, onEdit, onDelete }: UserCardProps) => {
   const userInfo = [

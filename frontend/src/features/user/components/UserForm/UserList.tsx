@@ -1,18 +1,18 @@
 import { useState } from "react";
 
-import { Stats } from "../../Stats";
-import { SearchFilter } from "../../SearchFilter";
+import { Stats } from "../../../../components/common/Stats";
+import { SearchFilter } from "../../../../components/common/SearchFilter";
 
-import { DeleteConfirmDialog } from "../../DeleteConfirmDialog";
-import type { User, UserFormData } from "../../../types/user";
+import { DeleteConfirmDialog } from "../../../../components/common/DeleteConfirmDialog";
+import type { User, UserFormData } from "../../types/user";
 import { Users } from "lucide-react";
 import { UserCard } from "../UserCard/UserCard";
 import { UserForm } from "./UserForm";
-import { PageHeader } from "@/components/PageHeader";
-import { useUsers } from "../../../hooks/useUsers";
-import { useFormOperations } from "../../../hooks/useFormOperations";
-import { Toast } from "../../ui/Toast";
-import type { ToastType } from "../../ui/Toast";
+import { PageHeader } from "../../../../components/common/PageHeader";
+import { useUsers } from "../../hooks/useUsers";
+import { useFormOperations } from "../../hooks/useFormOperations";
+import { Toast } from "../../../../components/ui/Toast";
+import type { ToastType } from "../../../../components/ui/Toast";
 
 export const UserList = () => {
   const { users, loading, createUser, updateUser, deleteUser } = useUsers();
@@ -141,9 +141,6 @@ export const UserList = () => {
                 <div className="text-center py-12">
                   <Users className="mx-auto h-16 w-16 text-[#8A2BE2] mb-4" />
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">Nenhuma pessoa encontrada</h3>
-                  <p className="text-gray-600">
-                    {searchTerm ? "Tente ajustar os termos de busca." : "Comece adicionando sua primeira pessoa."}
-                  </p>
                 </div>
               </div>
             </div>
