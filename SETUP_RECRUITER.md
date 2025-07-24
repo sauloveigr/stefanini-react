@@ -17,7 +17,7 @@ Antes de começar, certifique-se de ter instalado:
 
 ```bash
 # Clone o repositório em uma pasta de sua escolha
-git clone <URL_DO_REPOSITORIO> stefanini-react
+git clone <URL_DO_REPOSITORIO>
 cd stefanini-react
 ```
 
