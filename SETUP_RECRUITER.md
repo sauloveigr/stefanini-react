@@ -35,7 +35,7 @@ Execute o script de inicialização que fará tudo automaticamente:
 
 -   ✅ Cria automaticamente os arquivos `.env` necessários
 -   ✅ Inicia o PostgreSQL no Docker
--   ✅ **Instala as dependências do backend automaticamente**
+-   ✅ Instala as dependências do backend automaticamente
 -   ✅ Executa as migrations do banco de dados
 -   ✅ Fornece instruções para iniciar backend e frontend
 

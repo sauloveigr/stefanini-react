@@ -88,15 +88,15 @@ Este script irá:
 -   **Executar as migrations do banco de dados automaticamente**
 -   Fornecer instruções para iniciar backend e frontend
 
-**💡 Dica:** O script agora cria automaticamente os arquivos `.env` e executa as migrations do Prisma, então a tabela `User` será criada automaticamente no banco de dados.
+**💡 Dica:** O script cria automaticamente os arquivos `.env` e executa as migrations do Prisma, então a tabela `User` será criada automaticamente no banco de dados.
 
-### 3. Configuração Manual de Variáveis de Ambiente (Opcional)
+### 3. Verificar Arquivos .env
 
-Se preferir configurar manualmente, você pode criar os arquivos `.env`:
+Após executar o script `./start-dev.sh`, verifique se os arquivos `.env` foram criados automaticamente:
 
 #### Backend (.env)
 
-Crie o arquivo `backend/.env` com o seguinte conteúdo:
+O arquivo `backend/.env` deve conter:
 
 ```env
 # Database connection string for PostgreSQL
@@ -105,18 +105,14 @@ DATABASE_URL="postgresql://user:password@localhost:5432/db"
 
 #### Frontend (.env)
 
-Crie o arquivo `frontend/.env` com o seguinte conteúdo:
+O arquivo `frontend/.env` deve conter:
 
 ```env
 # API URL for backend communication
 VITE_API_URL=http://localhost:3001
 ```
 
-**⚠️ Importante:**
-
--   Certifique-se de que a URL da API no frontend (`VITE_API_URL`) corresponda à porta onde o backend está rodando (3001)
--   O arquivo `.env` deve ser criado antes de executar `yarn start:dev` ou `yarn dev`
--   O backend usa `@nestjs/config` para carregar as variáveis de ambiente automaticamente
+**💡 Dica:** Se os arquivos não foram criados automaticamente, você pode criá-los manualmente com o conteúdo acima.
 
 ### 4. Executando a Aplicação
 
