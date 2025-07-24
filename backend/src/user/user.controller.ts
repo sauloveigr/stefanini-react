@@ -9,15 +9,54 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
+@ApiTags('Users')
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
+  @ApiOperation({
+    summary: 'Create a new user',
+    description: 'Creates a new user with the provided information',
+  })
+  @ApiResponse({
+    status: 201,
+    description: 'User created successfully',
+    schema: {
+      type: 'object',
+      properties: {
+        data: {
+          type: 'object',
+          properties: {
+            id: { type: 'string', example: '1' },
+            name: { type: 'string', example: 'João Silva' },
+            email: { type: 'string', example: 'joao.silva@email.com' },
+            gender: { type: 'string', example: 'male' },
+            birthDate: { type: 'string', example: '1990-05-15' },
+            placeOfBirth: { type: 'string', example: 'São Paulo, SP' },
+            nationality: { type: 'string', example: 'Brasileira' },
+            cpf: { type: 'string', example: '12345678901' },
+            createdAt: { type: 'string', example: '2024-01-01T00:00:00.000Z' },
+            updatedAt: { type: 'string', example: '2024-01-01T00:00:00.000Z' },
+          },
+        },
+        message: { type: 'string', example: 'User created successfully' },
+      },
+    },
+  })
+  @ApiResponse({
+    status: 409,
+    description: 'User with this CPF already exists',
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal server error',
+  })
   async create(@Body() createUserDto: CreateUserDto) {
     try {
       const user = await this.userService.create(createUserDto);
@@ -37,6 +76,48 @@ export class UserController {
   }
 
   @Get()
+  @ApiOperation({
+    summary: 'Get all users',
+    description: 'Retrieves a list of all users',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Users retrieved successfully',
+    schema: {
+      type: 'object',
+      properties: {
+        data: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              id: { type: 'string', example: '1' },
+              name: { type: 'string', example: 'João Silva' },
+              email: { type: 'string', example: 'joao.silva@email.com' },
+              gender: { type: 'string', example: 'male' },
+              birthDate: { type: 'string', example: '1990-05-15' },
+              placeOfBirth: { type: 'string', example: 'São Paulo, SP' },
+              nationality: { type: 'string', example: 'Brasileira' },
+              cpf: { type: 'string', example: '12345678901' },
+              createdAt: {
+                type: 'string',
+                example: '2024-01-01T00:00:00.000Z',
+              },
+              updatedAt: {
+                type: 'string',
+                example: '2024-01-01T00:00:00.000Z',
+              },
+            },
+          },
+        },
+        message: { type: 'string', example: 'Users retrieved successfully' },
+      },
+    },
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal server error',
+  })
   async findAll() {
     try {
       const users = await this.userService.findAll();
@@ -50,6 +131,48 @@ export class UserController {
   }
 
   @Get(':id')
+  @ApiOperation({
+    summary: 'Get user by ID',
+    description: 'Retrieves a specific user by their ID',
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'User ID',
+    example: '1',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'User retrieved successfully',
+    schema: {
+      type: 'object',
+      properties: {
+        data: {
+          type: 'object',
+          properties: {
+            id: { type: 'string', example: '1' },
+            name: { type: 'string', example: 'João Silva' },
+            email: { type: 'string', example: 'joao.silva@email.com' },
+            gender: { type: 'string', example: 'male' },
+            birthDate: { type: 'string', example: '1990-05-15' },
+            placeOfBirth: { type: 'string', example: 'São Paulo, SP' },
+            nationality: { type: 'string', example: 'Brasileira' },
+            cpf: { type: 'string', example: '12345678901' },
+            createdAt: { type: 'string', example: '2024-01-01T00:00:00.000Z' },
+            updatedAt: { type: 'string', example: '2024-01-01T00:00:00.000Z' },
+          },
+        },
+        message: { type: 'string', example: 'User retrieved successfully' },
+      },
+    },
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'User not found',
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal server error',
+  })
   async findOne(@Param('id') id: string) {
     try {
       const user = await this.userService.findOne(id);
@@ -69,6 +192,52 @@ export class UserController {
   }
 
   @Patch(':id')
+  @ApiOperation({
+    summary: 'Update user',
+    description: 'Updates an existing user with the provided information',
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'User ID',
+    example: '1',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'User updated successfully',
+    schema: {
+      type: 'object',
+      properties: {
+        data: {
+          type: 'object',
+          properties: {
+            id: { type: 'string', example: '1' },
+            name: { type: 'string', example: 'João Silva' },
+            email: { type: 'string', example: 'joao.silva@email.com' },
+            gender: { type: 'string', example: 'male' },
+            birthDate: { type: 'string', example: '1990-05-15' },
+            placeOfBirth: { type: 'string', example: 'São Paulo, SP' },
+            nationality: { type: 'string', example: 'Brasileira' },
+            cpf: { type: 'string', example: '12345678901' },
+            createdAt: { type: 'string', example: '2024-01-01T00:00:00.000Z' },
+            updatedAt: { type: 'string', example: '2024-01-01T00:00:00.000Z' },
+          },
+        },
+        message: { type: 'string', example: 'User updated successfully' },
+      },
+    },
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'User not found',
+  })
+  @ApiResponse({
+    status: 409,
+    description: 'User with this CPF already exists',
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal server error',
+  })
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     try {
       const user = await this.userService.update(id, updateUserDto);
@@ -95,6 +264,33 @@ export class UserController {
   }
 
   @Delete(':id')
+  @ApiOperation({
+    summary: 'Delete user',
+    description: 'Deletes a user by their ID',
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'User ID',
+    example: '1',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'User deleted successfully',
+    schema: {
+      type: 'object',
+      properties: {
+        message: { type: 'string', example: 'User deleted successfully' },
+      },
+    },
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'User not found',
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal server error',
+  })
   async remove(@Param('id') id: string) {
     try {
       await this.userService.remove(id);

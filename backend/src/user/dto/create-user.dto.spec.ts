@@ -55,7 +55,7 @@ describe('CreateUserDto', () => {
       dto.name = 'João Silva';
       dto.gender = 'male';
       dto.birthDate = '1990-01-01';
-      dto.cpf = '1234567890'; // Less than 11 digits
+      dto.cpf = '1234567890';
 
       const errors = await validate(dto);
       expect(errors).toHaveLength(1);

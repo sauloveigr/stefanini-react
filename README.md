@@ -12,6 +12,7 @@ Um sistema full-stack de gerenciamento de usuários com frontend React e backend
 -   ✅ Notificações toast para feedback do usuário
 -   ✅ Banco de dados PostgreSQL com Prisma ORM
 -   ✅ Testes automatizados com Jest (Backend)
+-   ✅ Documentação interativa da API com Swagger
 
 ## Stack Tecnológica
 
@@ -32,6 +33,7 @@ Um sistema full-stack de gerenciamento de usuários com frontend React e backend
 -   Class-validator para validação de DTO
 -   CORS habilitado para comunicação com frontend
 -   Jest para testes automatizados
+-   Swagger para documentação da API
 
 ## Como Começar
 
@@ -136,6 +138,7 @@ Este script irá:
 
     ```
     🚀 Application is running on: http://localhost:3001
+    📚 Swagger documentation available at: http://localhost:3001/api
     ```
 
 3. **Iniciar Frontend (Terminal 2):**
@@ -165,6 +168,7 @@ Este script irá:
     - Frontend: http://localhost:5173
     - Backend API: http://localhost:3001
     - Verificação de saúde: http://localhost:3001/health
+    - **Documentação Swagger**: http://localhost:3001/api
 
 ### Migrations do Banco de Dados
 
@@ -208,6 +212,114 @@ O backend fornece os seguintes endpoints REST:
 -   `POST /users` - Criar um novo usuário
 -   `PATCH /users/:id` - Atualizar um usuário existente
 -   `DELETE /users/:id` - Deletar um usuário
+
+## 📚 Documentação da API com Swagger
+
+O projeto inclui documentação interativa da API usando Swagger. Após iniciar o backend, você pode acessar:
+
+### URLs de Acesso
+
+-   **Swagger UI**: http://localhost:3001/api
+-   **OpenAPI JSON**: http://localhost:3001/api-json
+
+### Como Testar a API no Swagger
+
+#### 1. Acessar a Interface Swagger
+
+1. Certifique-se de que o backend está rodando:
+
+    ```bash
+    cd backend
+    yarn start:dev
+    ```
+
+2. Abra seu navegador e acesse:
+    ```
+    http://localhost:3001/api
+    ```
+
+#### 2. Testar Endpoints no Swagger
+
+##### Criar Usuário (POST /users)
+
+1. Clique em **"Users"** → **"POST /users"**
+2. Clique em **"Try it out"**
+3. Preencha o JSON de exemplo:
+    ```json
+    {
+        "name": "João Silva",
+        "gender": "male",
+        "email": "joao.silva@email.com",
+        "birthDate": "1990-05-15",
+        "placeOfBirth": "São Paulo, SP",
+        "nationality": "Brasileira",
+        "cpf": "12345678901"
+    }
+    ```
+4. Clique em **"Execute"**
+
+##### Listar Usuários (GET /users)
+
+1. Clique em **"GET /users"**
+2. Clique em **"Try it out"**
+3. Clique em **"Execute"**
+
+##### Buscar por ID (GET /users/{id})
+
+1. Clique em **"GET /users/{id}"**
+2. Clique em **"Try it out"**
+3. Digite o ID do usuário (ex: `1`)
+4. Clique em **"Execute"**
+
+##### Atualizar Usuário (PATCH /users/{id})
+
+1. Clique em **"PATCH /users/{id}"**
+2. Clique em **"Try it out"**
+3. Digite o ID do usuário
+4. Preencha os campos que deseja atualizar
+5. Clique em **"Execute"**
+
+##### Deletar Usuário (DELETE /users/{id})
+
+1. Clique em **"DELETE /users/{id}"**
+2. Clique em **"Try it out"**
+3. Digite o ID do usuário
+4. Clique em **"Execute"**
+
+#### 3. Testar via cURL (Linha de Comando)
+
+```bash
+# Teste de saúde
+curl http://localhost:3001/health
+
+# Criar usuário
+curl -X POST http://localhost:3001/users \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Maria Silva","gender":"female","email":"maria@email.com","birthDate":"1985-08-20","placeOfBirth":"Rio de Janeiro, RJ","nationality":"Brasileira","cpf":"98765432100"}'
+
+# Listar usuários
+curl http://localhost:3001/users
+
+# Buscar por ID
+curl http://localhost:3001/users/{id}
+
+# Atualizar usuário
+curl -X PATCH http://localhost:3001/users/{id} \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Maria Silva Atualizada"}'
+
+# Deletar usuário
+curl -X DELETE http://localhost:3001/users/{id}
+```
+
+#### 4. Recursos da Documentação Swagger
+
+-   ✅ **Interface Interativa**: Teste endpoints diretamente no navegador
+-   ✅ **Exemplos de Dados**: Valores de exemplo para todos os campos
+-   ✅ **Validação em Tempo Real**: Validação de formulários
+-   ✅ **Respostas de Erro**: Documentação de todos os códigos de erro
+-   ✅ **Esquemas de Dados**: Estrutura completa dos objetos
+-   ✅ **Descrições em Português**: Documentação localizada
 
 ### Schema do Banco de Dados
 

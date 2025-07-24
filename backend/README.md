@@ -96,3 +96,184 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+# Backend
+
+Esta é uma aplicação NestJS com Prisma ORM para gerenciamento de banco de dados.
+
+## Instalação
+
+```bash
+yarn install
+```
+
+## Executando a Aplicação
+
+```bash
+# desenvolvimento
+yarn start:dev
+
+# modo produção
+yarn start:prod
+```
+
+## Testes
+
+```bash
+# testes unitários
+yarn test
+
+# testes e2e
+yarn test:e2e
+
+# cobertura de testes
+yarn test:cov
+```
+
+## Banco de Dados
+
+```bash
+# Gerar cliente Prisma
+yarn prisma:generate
+
+# Executar migrations
+yarn prisma:migrate
+
+# Configurar banco de dados (gerar + migrar)
+yarn db:setup
+```
+
+## Documentação da API
+
+A documentação da API está disponível através do Swagger UI quando a aplicação está rodando:
+
+- **Swagger UI**: http://localhost:3001/api
+- **OpenAPI JSON**: http://localhost:3001/api-json
+
+A documentação inclui:
+
+- Todos os endpoints disponíveis
+- Esquemas de requisição/resposta
+- Dados de exemplo
+- Respostas de erro
+- Interface interativa para testes
+
+### Endpoints Disponíveis
+
+- `GET /` - Mensagem de boas-vindas
+- `GET /health` - Verificação de saúde
+- `GET /users` - Obter todos os usuários
+- `POST /users` - Criar novo usuário
+- `GET /users/:id` - Obter usuário por ID
+- `PATCH /users/:id` - Atualizar usuário
+- `DELETE /users/:id` - Deletar usuário
+
+## Variáveis de Ambiente
+
+Copie `.env.example` para `.env` e configure as seguintes variáveis:
+
+- `DATABASE_URL` - String de conexão com o banco de dados
+- `PORT` - Porta da aplicação (padrão: 3001)
+
+## Como Testar o Swagger
+
+### 1. Acessar a Interface Swagger
+
+1. Inicie o servidor de desenvolvimento:
+
+   ```bash
+   cd backend
+   yarn start:dev
+   ```
+
+2. Abra seu navegador e acesse:
+   ```
+   http://localhost:3001/api
+   ```
+
+### 2. Testar Endpoints no Swagger
+
+#### Criar Usuário (POST /users)
+
+1. Clique em **"Users"** → **"POST /users"**
+2. Clique em **"Try it out"**
+3. Preencha o JSON:
+   ```json
+   {
+     "name": "João Silva",
+     "gender": "male",
+     "email": "joao.silva@email.com",
+     "birthDate": "1990-05-15",
+     "placeOfBirth": "São Paulo, SP",
+     "nationality": "Brasileira",
+     "cpf": "12345678901"
+   }
+   ```
+4. Clique em **"Execute"**
+
+#### Listar Usuários (GET /users)
+
+1. Clique em **"GET /users"**
+2. Clique em **"Try it out"**
+3. Clique em **"Execute"**
+
+#### Buscar por ID (GET /users/{id})
+
+1. Clique em **"GET /users/{id}"**
+2. Clique em **"Try it out"**
+3. Digite o ID do usuário
+4. Clique em **"Execute"**
+
+### 3. Testar via cURL
+
+```bash
+# Teste de saúde
+curl http://localhost:3001/health
+
+# Criar usuário
+curl -X POST http://localhost:3001/users \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Maria Silva","gender":"female","email":"maria@email.com","birthDate":"1985-08-20","cpf":"98765432100"}'
+
+# Listar usuários
+curl http://localhost:3001/users
+
+# Buscar por ID
+curl http://localhost:3001/users/{id}
+```
+
+### 4. Verificar Documentação OpenAPI
+
+```bash
+curl http://localhost:3001/api-json
+```
+
+## Estrutura do Projeto
+
+```
+backend/
+├── src/
+│   ├── user/
+│   │   ├── user.controller.ts    # Controlador de usuários
+│   │   ├── user.service.ts       # Serviço de usuários
+│   │   ├── user.module.ts        # Módulo de usuários
+│   │   └── dto/
+│   │       ├── create-user.dto.ts    # DTO para criação
+│   │       └── update-user.dto.ts    # DTO para atualização
+│   ├── app.controller.ts         # Controlador principal
+│   ├── app.service.ts           # Serviço principal
+│   ├── app.module.ts            # Módulo principal
+│   └── main.ts                  # Arquivo de inicialização
+├── prisma/
+│   └── schema.prisma           # Schema do banco de dados
+└── package.json
+```
+
+## Tecnologias Utilizadas
+
+- **NestJS**: Framework para construção de aplicações escaláveis
+- **Prisma**: ORM moderno para TypeScript e Node.js
+- **PostgreSQL**: Banco de dados relacional
+- **Swagger**: Documentação interativa da API
+- **Jest**: Framework de testes
+- **TypeScript**: Linguagem de programação tipada

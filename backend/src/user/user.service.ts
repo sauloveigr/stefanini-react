@@ -20,7 +20,6 @@ export class UserService {
     try {
       const userData: any = { ...data };
 
-      // birthDate é obrigatório, sempre processar
       if (data.birthDate && data.birthDate.trim() !== '') {
         const [year, month, day] = data.birthDate.split('-').map(Number);
         userData.birthDate = new Date(year, month - 1, day);
@@ -28,7 +27,6 @@ export class UserService {
         throw new BadRequestException('birthDate is required');
       }
 
-      // Tratar email
       if (userData.email && userData.email.trim() !== '') {
         if (!this.validateEmail(userData.email.trim())) {
           throw new BadRequestException('Email deve ser um email válido');
@@ -38,21 +36,18 @@ export class UserService {
         delete userData.email;
       }
 
-      // Tratar placeOfBirth
       if (!userData.placeOfBirth || userData.placeOfBirth.trim() === '') {
         delete userData.placeOfBirth;
       } else {
         userData.placeOfBirth = userData.placeOfBirth.trim();
       }
 
-      // Tratar nationality
       if (!userData.nationality || userData.nationality.trim() === '') {
         delete userData.nationality;
       } else {
         userData.nationality = userData.nationality.trim();
       }
 
-      // Tratar gender
       if (!userData.gender || userData.gender.trim() === '') {
         delete userData.gender;
       } else {
@@ -105,7 +100,6 @@ export class UserService {
 
       const updateData: any = { ...data };
 
-      // Tratar birthDate (opcional na atualização)
       if (data.birthDate !== undefined) {
         if (data.birthDate && data.birthDate.trim() !== '') {
           const [year, month, day] = data.birthDate.split('-').map(Number);
@@ -115,7 +109,6 @@ export class UserService {
         }
       }
 
-      // Tratar email
       if (updateData.email !== undefined) {
         if (updateData.email && updateData.email.trim() !== '') {
           if (!this.validateEmail(updateData.email.trim())) {
@@ -127,7 +120,6 @@ export class UserService {
         }
       }
 
-      // Tratar placeOfBirth
       if (updateData.placeOfBirth !== undefined) {
         updateData.placeOfBirth =
           updateData.placeOfBirth && updateData.placeOfBirth.trim() !== ''
@@ -135,7 +127,6 @@ export class UserService {
             : null;
       }
 
-      // Tratar nationality
       if (updateData.nationality !== undefined) {
         updateData.nationality =
           updateData.nationality && updateData.nationality.trim() !== ''
@@ -143,7 +134,6 @@ export class UserService {
             : null;
       }
 
-      // Tratar gender
       if (updateData.gender !== undefined) {
         updateData.gender =
           updateData.gender && updateData.gender.trim() !== ''
@@ -151,7 +141,6 @@ export class UserService {
             : null;
       }
 
-      // Verificar CPF duplicado
       if (updateData.cpf) {
         const existingUserWithCpf = await this.prisma.user.findFirst({
           where: {

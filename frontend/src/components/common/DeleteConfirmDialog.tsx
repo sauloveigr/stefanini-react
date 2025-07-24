@@ -50,7 +50,7 @@ export const DeleteConfirmDialog = ({ user, onConfirm, onCancel }: DeleteConfirm
               </div>
 
               <p className="text-base text-gray-600 mb-8">
-                Tem certeza que deseja excluir <span className="font-medium text-gray-900">{user.name}</span>?
+                Tem certeza que deseja excluir <span className="font-medium text-gray-900 truncate block max-w-full" title={user.name}>{user.name}</span>?
                 Esta ação removerá permanentemente o usuário e todos os dados associados.
               </p>
 
