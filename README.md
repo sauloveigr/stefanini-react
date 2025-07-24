@@ -14,6 +14,11 @@ Um sistema full-stack de gerenciamento de usuários com frontend React e backend
 -   ✅ Testes automatizados com Jest (Backend)
 -   ✅ Documentação interativa da API com Swagger
 
+## 🚀 Extras Implementados
+
+- 📚 Documentação dos Endpoints com Swagger
+- 🧪 Testes Automatizados com Jest
+
 ## Stack Tecnológica
 
 ### Frontend
