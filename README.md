@@ -14,6 +14,11 @@ Um sistema full-stack de gerenciamento de usuários com frontend React e backend
 -   ✅ Testes automatizados com Jest (Backend)
 -   ✅ Documentação interativa da API com Swagger
 
+## 🚀 Extras Implementados
+
+- 📚 Documentação dos Endpoints com Swagger
+- 🧪 Testes Automatizados com Jest
+
 ## Stack Tecnológica
 
 ### Frontend
@@ -425,14 +430,6 @@ backend/
 │   ├── app.controller.spec.ts         # Testes do AppController
 │   └── app.service.spec.ts           # Testes do AppService
 ```
-
-### Benefícios dos Testes
-
-1. **Qualidade de Código**: Garantia de que as funcionalidades principais estão testadas
-2. **Manutenibilidade**: Mudanças futuras podem ser testadas automaticamente
-3. **Documentação**: Os testes servem como documentação do comportamento esperado
-4. **Refatoração Segura**: Mudanças podem ser feitas com confiança
-5. **Detecção de Regressões**: Problemas são identificados rapidamente
 
 ## Solução de Problemas
 
