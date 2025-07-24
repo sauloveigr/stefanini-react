@@ -426,14 +426,6 @@ backend/
 │   └── app.service.spec.ts           # Testes do AppService
 ```
 
-### Benefícios dos Testes
-
-1. **Qualidade de Código**: Garantia de que as funcionalidades principais estão testadas
-2. **Manutenibilidade**: Mudanças futuras podem ser testadas automaticamente
-3. **Documentação**: Os testes servem como documentação do comportamento esperado
-4. **Refatoração Segura**: Mudanças podem ser feitas com confiança
-5. **Detecção de Regressões**: Problemas são identificados rapidamente
-
 ## Solução de Problemas
 
 1. **Problemas de conexão com banco de dados:**
