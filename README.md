@@ -42,18 +42,40 @@ Um sistema full-stack de gerenciamento de usuários com frontend React e backend
 
 ## Como Começar
 
+### 1. Clone o Repositório
+
+Primeiro, clone o repositório em uma pasta de sua escolha:
+
+```bash
+# Clone o repositório
+git clone <URL_DO_REPOSITORIO>
+
+# Navegue para a pasta do projeto
+cd stefanini-react
+```
+
+**⚠️ Importante:** Certifique-se de estar na pasta raiz do projeto (que contém os arquivos `docker-compose.yml`, `backend/` e `frontend/`) antes de executar os próximos passos.
+
+**💡 Dica:** Para verificar se está no diretório correto, execute:
+
+```bash
+ls
+# Deve mostrar: backend/ frontend/ docker-compose.yml start-dev.sh README.md
+```
+
 ### Pré-requisitos
 
 -   Node.js (v18 ou superior)
 -   Docker e Docker Compose
 -   Yarn ou npm
 
-### Inicialização Rápida (Script)
+### 2. Inicialização Rápida (Script)
 
-Para facilitar o processo, você pode usar o script de inicialização:
+Após clonar o repositório e estar no diretório correto, execute o script de inicialização:
 
 ```bash
-# Certifique-se de estar no diretório raiz do projeto
+# ⚠️ IMPORTANTE: Certifique-se de estar na pasta raiz do projeto (ex: stefanini-react)
+# O script deve ser executado no diretório que contém os arquivos docker-compose.yml, backend/ e frontend/
 ./start-dev.sh
 ```
 
@@ -68,7 +90,7 @@ Este script irá:
 
 **💡 Dica:** O script agora cria automaticamente os arquivos `.env` e executa as migrations do Prisma, então a tabela `User` será criada automaticamente no banco de dados.
 
-### Configuração Manual de Variáveis de Ambiente (Opcional)
+### 3. Configuração Manual de Variáveis de Ambiente (Opcional)
 
 Se preferir configurar manualmente, você pode criar os arquivos `.env`:
 
@@ -96,12 +118,13 @@ VITE_API_URL=http://localhost:3001
 -   O arquivo `.env` deve ser criado antes de executar `yarn start:dev` ou `yarn dev`
 -   O backend usa `@nestjs/config` para carregar as variáveis de ambiente automaticamente
 
-### Executando a Aplicação
+### 4. Executando a Aplicação
 
 1. **Iniciar Banco de Dados PostgreSQL:**
 
     ```bash
-    # Certifique-se de estar no diretório raiz do projeto
+    # ⚠️ IMPORTANTE: Certifique-se de estar na pasta raiz do projeto (ex: stefanini-react)
+    # O comando deve ser executado no diretório que contém o arquivo docker-compose.yml
     # ⚠️ IMPORTANTE: Certifique-se de que o Docker Desktop está rodando antes de executar este comando
     # Iniciar PostgreSQL no Docker
     docker-compose up postgres -d

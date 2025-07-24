@@ -17,8 +17,8 @@ Antes de começar, certifique-se de ter instalado:
 
 ```bash
 # Clone o repositório em uma pasta de sua escolha
-git clone <URL_DO_REPOSITORIO> minha-pasta-teste
-cd minha-pasta-teste
+git clone <URL_DO_REPOSITORIO> stefanini-react
+cd stefanini-react
 ```
 
 ### 2. Inicialização Automática (Recomendado)
@@ -26,7 +26,8 @@ cd minha-pasta-teste
 Execute o script de inicialização que fará tudo automaticamente:
 
 ```bash
-# Execute o script de setup
+# ⚠️ IMPORTANTE: Certifique-se de estar na pasta raiz do projeto (stefanini-react)
+# O script deve ser executado no diretório que contém os arquivos docker-compose.yml, backend/ e frontend/
 ./start-dev.sh
 ```
 
@@ -34,6 +35,7 @@ Execute o script de inicialização que fará tudo automaticamente:
 
 -   ✅ Cria automaticamente os arquivos `.env` necessários
 -   ✅ Inicia o PostgreSQL no Docker
+-   ✅ **Instala as dependências do backend automaticamente**
 -   ✅ Executa as migrations do banco de dados
 -   ✅ Fornece instruções para iniciar backend e frontend
 
@@ -141,7 +143,10 @@ yarn test
 ```bash
 # Certifique-se de estar no diretório correto
 pwd
-# Deve mostrar o caminho para sua pasta do projeto
+# Deve mostrar o caminho para sua pasta do projeto (ex: /caminho/para/stefanini-react)
+# Verifique se você está na pasta que contém os arquivos docker-compose.yml, backend/ e frontend/
+ls
+# Deve mostrar: backend/ frontend/ docker-compose.yml start-dev.sh README.md
 ```
 
 ### Erro: "Docker not running"
