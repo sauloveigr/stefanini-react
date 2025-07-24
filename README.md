@@ -2,6 +2,9 @@
 
 Um sistema full-stack de gerenciamento de usuários com frontend React e backend NestJS, conectados via axios para operações CRUD.
 
+<img width="1920" height="998" alt="image" src="https://github.com/user-attachments/assets/27796cb1-97a4-4d3b-9b54-0523f5e91d6e" />
+
+
 ## Funcionalidades
 
 -   ✅ Operações Create, Read, Update, Delete (CRUD) para usuários
