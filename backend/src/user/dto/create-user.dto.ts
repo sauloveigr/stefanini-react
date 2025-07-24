@@ -11,12 +11,12 @@ export class CreateUserDto {
   @IsOptional()
   email?: string;
 
-  @IsOptional()
+  @IsNotEmpty()
   @IsDateString(
     {},
     { message: 'birthDate must be a valid date string (YYYY-MM-DD)' },
   )
-  birthDate?: string;
+  birthDate: string;
 
   @IsOptional()
   placeOfBirth?: string;
