@@ -10,7 +10,7 @@ export const GenderBadge = ({ gender }: { gender?: string }) => {
           : "bg-gray-100 text-gray-700"
         }`}
     >
-      {gender === "male" ? "Masculino" : gender === "female" ? "Feminino" : gender}
+      {gender === "male" ? "Masculino" : "Feminino"}
     </span>
   );
 };
