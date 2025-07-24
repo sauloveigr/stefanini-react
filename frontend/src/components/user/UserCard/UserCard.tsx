@@ -11,7 +11,10 @@ export interface UserCardProps {
 }
 
 const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString();
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat('pt-BR', {
+    timeZone: 'UTC',
+  }).format(date);
 };
 
 const formatCPF = (cpf: string) => {

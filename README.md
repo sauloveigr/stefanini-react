@@ -41,6 +41,68 @@ Um sistema full-stack de gerenciamento de usuários com frontend React e backend
 -   Docker e Docker Compose
 -   Yarn ou npm
 
+### Configuração de Variáveis de Ambiente
+
+Antes de executar a aplicação, você precisa configurar os arquivos `.env` em ambos os diretórios (backend e frontend):
+
+#### Backend (.env)
+
+Crie o arquivo `backend/.env` com o seguinte conteúdo:
+
+```env
+# Database connection string for PostgreSQL
+DATABASE_URL="postgresql://user:password@localhost:5432/db"
+```
+
+**💡 Dica:** Você pode copiar o arquivo `backend/.env.example` e renomeá-lo para `.env`:
+
+```bash
+cd backend/
+cp .env.example .env
+```
+
+#### Frontend (.env)
+
+Crie o arquivo `frontend/.env` com o seguinte conteúdo:
+
+```env
+# API URL for backend communication
+VITE_API_URL=http://localhost:3001
+```
+
+**💡 Dica:** Você pode copiar o arquivo `frontend/.env.example` e renomeá-lo para `.env`:
+
+```bash
+cd frontend/
+cp .env.example .env
+```
+
+**⚠️ Importante:**
+
+-   Certifique-se de que a URL da API no frontend (`VITE_API_URL`) corresponda à porta onde o backend está rodando (3001)
+-   O arquivo `.env` deve ser criado antes de executar `yarn start:dev` ou `yarn dev`
+-   O backend usa `@nestjs/config` para carregar as variáveis de ambiente automaticamente
+
+### Inicialização Rápida (Script)
+
+Para facilitar o processo, você pode usar o script de inicialização:
+
+```bash
+# Certifique-se de estar no diretório raiz (stefanini)
+./start-dev.sh
+```
+
+Este script irá:
+
+-   Verificar se você está no diretório correto
+-   Verificar se os arquivos `.env` existem
+-   Iniciar o PostgreSQL
+-   Aguardar o PostgreSQL estar pronto
+-   **Executar as migrations do banco de dados automaticamente**
+-   Fornecer instruções para iniciar backend e frontend
+
+**💡 Dica:** O script agora executa automaticamente as migrations do Prisma, então a tabela `User` será criada automaticamente no banco de dados.
+
 ### Executando a Aplicação
 
 1. **Iniciar Banco de Dados PostgreSQL:**
@@ -49,6 +111,7 @@ Um sistema full-stack de gerenciamento de usuários com frontend React e backend
     # Certifique-se de estar no diretório raiz (/stefanini)
     cd stefanini
 
+    # ⚠️ IMPORTANTE: Certifique-se de que o Docker Desktop está rodando antes de executar este comando
     # Iniciar PostgreSQL no Docker
     docker-compose up postgres -d
     ```
@@ -66,6 +129,8 @@ Um sistema full-stack de gerenciamento de usuários com frontend React e backend
     # Inicie o backend
     yarn start:dev
     ```
+
+    **⚠️ Importante:** Certifique-se de estar no diretório `backend/` antes de executar os comandos.
 
     **Aguarde até ver:**
 
@@ -87,6 +152,8 @@ Um sistema full-stack de gerenciamento de usuários com frontend React e backend
     yarn dev
     ```
 
+    **⚠️ Importante:** Certifique-se de estar no diretório `frontend/` antes de executar os comandos.
+
     **Aguarde até ver:**
 
     ```
@@ -98,6 +165,39 @@ Um sistema full-stack de gerenciamento de usuários com frontend React e backend
     - Frontend: http://localhost:5173
     - Backend API: http://localhost:3001
     - Verificação de saúde: http://localhost:3001/health
+
+### Migrations do Banco de Dados
+
+O projeto usa Prisma ORM para gerenciar o banco de dados. As migrations são executadas automaticamente pelo script `start-dev.sh`, mas você também pode executá-las manualmente:
+
+```bash
+# Navegue até o diretório backend
+cd backend/
+
+# Gerar o cliente Prisma
+yarn prisma:generate
+
+# Executar migrations existentes
+yarn prisma:migrate
+
+# Ou executar tudo de uma vez (gerar cliente + migrations)
+yarn db:setup
+```
+
+**📝 Comandos úteis do Prisma:**
+
+```bash
+# Criar uma nova migration (desenvolvimento)
+yarn prisma:migrate:dev
+
+# Visualizar o banco de dados no Prisma Studio
+npx prisma studio
+
+# Resetar o banco de dados (⚠️ CUIDADO: apaga todos os dados)
+npx prisma migrate reset
+```
+
+**💡 Dica:** Se você precisar criar novas migrations, use `yarn prisma:migrate:dev` durante o desenvolvimento. Para produção, use `yarn prisma:migrate`.
 
 ### Endpoints da API
 
@@ -249,9 +349,30 @@ backend/
     - Certifique-se de que o CPF tem exatamente 11 dígitos
 
 5. **Problemas com testes:**
+
     - Certifique-se de estar no diretório `backend/`
     - Execute `yarn install` se as dependências não estiverem instaladas
     - Verifique se o Jest está configurado corretamente no `package.json`
+
+6. **Problemas com arquivos .env:**
+
+    - Certifique-se de que os arquivos `.env` foram criados em ambos os diretórios (`backend/` e `frontend/`)
+    - Verifique se o `DATABASE_URL` no backend está correto
+    - Confirme se o `VITE_API_URL` no frontend aponta para a porta correta do backend (3001)
+    - Reinicie os serviços após criar/modificar os arquivos `.env`
+
+7. **Problemas de configuração do backend:**
+
+    - O backend usa `@nestjs/config` para carregar variáveis de ambiente
+    - Certifique-se de que o `ConfigModule` está configurado no `app.module.ts`
+    - Se as variáveis não estão sendo carregadas, verifique se o arquivo `.env` está no diretório correto (`backend/.env`)
+    - Execute `yarn install` para garantir que `@nestjs/config` está instalado
+
+8. **Erro "Command not found" ao executar yarn start:dev:**
+    - Certifique-se de estar no diretório correto: `cd backend/` antes de executar `yarn start:dev`
+    - Certifique-se de estar no diretório correto: `cd frontend/` antes de executar `yarn dev`
+    - Verifique se você está no diretório raiz (`stefanini`) quando executar `docker-compose up postgres -d`
+    - Os comandos `yarn start:dev` e `yarn dev` só funcionam dentro de seus respectivos diretórios
 
 ## Estrutura do Projeto
 
@@ -262,12 +383,14 @@ backend/
 │   │   ├── hooks/          # Hooks personalizados
 │   │   ├── types/          # Tipos TypeScript
 │   │   └── utils/          # Funções utilitárias
+│   ├── .env.example        # Template de variáveis de ambiente
 │   └── package.json
 ├── backend/                 # Backend NestJS (porta 3001)
 │   ├── src/
 │   │   ├── user/           # Módulo de usuário
 │   │   │   ├── *.spec.ts   # Testes automatizados
 │   │   └── prisma/         # Schema do banco de dados
+│   ├── .env.example        # Template de variáveis de ambiente
 │   └── package.json
 └── docker-compose.yml      # Configuração PostgreSQL (porta 5432)
 ```
