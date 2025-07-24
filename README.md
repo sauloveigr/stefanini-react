@@ -16,8 +16,8 @@ Um sistema full-stack de gerenciamento de usuários com frontend React e backend
 
 ## 🚀 Extras Implementados
 
-- 📚 Documentação dos Endpoints com Swagger
-- 🧪 Testes Automatizados com Jest
+-   📚 Documentação dos Endpoints com Swagger
+-   🧪 Testes Automatizados com Jest
 
 ## Stack Tecnológica
 
@@ -48,9 +48,29 @@ Um sistema full-stack de gerenciamento de usuários com frontend React e backend
 -   Docker e Docker Compose
 -   Yarn ou npm
 
-### Configuração de Variáveis de Ambiente
+### Inicialização Rápida (Script)
 
-Antes de executar a aplicação, você precisa configurar os arquivos `.env` em ambos os diretórios (backend e frontend):
+Para facilitar o processo, você pode usar o script de inicialização:
+
+```bash
+# Certifique-se de estar no diretório raiz do projeto
+./start-dev.sh
+```
+
+Este script irá:
+
+-   Verificar se você está no diretório correto
+-   **Criar automaticamente os arquivos .env necessários**
+-   Iniciar o PostgreSQL
+-   Aguardar o PostgreSQL estar pronto
+-   **Executar as migrations do banco de dados automaticamente**
+-   Fornecer instruções para iniciar backend e frontend
+
+**💡 Dica:** O script agora cria automaticamente os arquivos `.env` e executa as migrations do Prisma, então a tabela `User` será criada automaticamente no banco de dados.
+
+### Configuração Manual de Variáveis de Ambiente (Opcional)
+
+Se preferir configurar manualmente, você pode criar os arquivos `.env`:
 
 #### Backend (.env)
 
@@ -59,13 +79,6 @@ Crie o arquivo `backend/.env` com o seguinte conteúdo:
 ```env
 # Database connection string for PostgreSQL
 DATABASE_URL="postgresql://user:password@localhost:5432/db"
-```
-
-**💡 Dica:** Você pode copiar o arquivo `backend/.env.example` e renomeá-lo para `.env`:
-
-```bash
-cd backend/
-cp .env.example .env
 ```
 
 #### Frontend (.env)
@@ -77,47 +90,18 @@ Crie o arquivo `frontend/.env` com o seguinte conteúdo:
 VITE_API_URL=http://localhost:3001
 ```
 
-**💡 Dica:** Você pode copiar o arquivo `frontend/.env.example` e renomeá-lo para `.env`:
-
-```bash
-cd frontend/
-cp .env.example .env
-```
-
 **⚠️ Importante:**
 
 -   Certifique-se de que a URL da API no frontend (`VITE_API_URL`) corresponda à porta onde o backend está rodando (3001)
 -   O arquivo `.env` deve ser criado antes de executar `yarn start:dev` ou `yarn dev`
 -   O backend usa `@nestjs/config` para carregar as variáveis de ambiente automaticamente
 
-### Inicialização Rápida (Script)
-
-Para facilitar o processo, você pode usar o script de inicialização:
-
-```bash
-# Certifique-se de estar no diretório raiz (stefanini)
-./start-dev.sh
-```
-
-Este script irá:
-
--   Verificar se você está no diretório correto
--   Verificar se os arquivos `.env` existem
--   Iniciar o PostgreSQL
--   Aguardar o PostgreSQL estar pronto
--   **Executar as migrations do banco de dados automaticamente**
--   Fornecer instruções para iniciar backend e frontend
-
-**💡 Dica:** O script agora executa automaticamente as migrations do Prisma, então a tabela `User` será criada automaticamente no banco de dados.
-
 ### Executando a Aplicação
 
 1. **Iniciar Banco de Dados PostgreSQL:**
 
     ```bash
-    # Certifique-se de estar no diretório raiz (/stefanini)
-    cd stefanini
-
+    # Certifique-se de estar no diretório raiz do projeto
     # ⚠️ IMPORTANTE: Certifique-se de que o Docker Desktop está rodando antes de executar este comando
     # Iniciar PostgreSQL no Docker
     docker-compose up postgres -d
